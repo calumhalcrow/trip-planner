@@ -1,5 +1,10 @@
 TripPlanner::Application.routes.draw do
   namespace :location do
+    resources :destinations
+  end
+
+
+  namespace :location do
     resources :homes
   end
 
