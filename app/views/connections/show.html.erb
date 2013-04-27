@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>From:</b>
+  <%= @connection.from %>
+</p>
+
+<p>
+  <b>To:</b>
+  <%= @connection.to %>
+</p>
+
+<p>
+  <b>Depart at:</b>
+  <%= @connection.depart_at %>
+</p>
+
+<p>
+  <b>Arrive at:</b>
+  <%= @connection.arrive_at %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @connection.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_connection_path(@connection) %> |
+<%= link_to 'Back', connections_path %>

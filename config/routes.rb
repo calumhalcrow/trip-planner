@@ -1,4 +1,7 @@
 TripPlanner::Application.routes.draw do
+  resources :connections
+
+
   resources :users
 
 
