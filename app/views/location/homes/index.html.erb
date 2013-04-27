@@ -1,0 +1,21 @@
+<h1>Listing location_homes</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @location_homes.each do |location_home| %>
+  <tr>
+    <td><%= link_to 'Show', location_home %></td>
+    <td><%= link_to 'Edit', edit_location_home_path(location_home) %></td>
+    <td><%= link_to 'Destroy', location_home, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Home', new_location_home_path %>
