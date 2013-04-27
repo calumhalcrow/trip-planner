@@ -1,4 +1,7 @@
 TripPlanner::Application.routes.draw do
+  resources :users
+
+
   namespace :location do
     resources :destinations
   end
