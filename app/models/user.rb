@@ -1,5 +1,5 @@
 class User
   include Mongoid::Document
-  field :name, type: Str
-  embedded_in :home
+  field :name, type: String
+  has_many :trips
 end

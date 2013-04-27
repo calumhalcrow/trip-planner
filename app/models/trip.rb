@@ -1,5 +1,7 @@
 class Trip
   include Mongoid::Document
-  field :name, type: Str
-  embedded_in :destination
+  field :name, type: String
+  embeds_one :destination
+  embeds_many :connections
+  belongs_to :user
 end
