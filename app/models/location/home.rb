@@ -1,4 +1,4 @@
-class Location::Home
+class Location::Home < Location
   include Mongoid::Document
   include Mongoid::Timestamps
 
