@@ -1,5 +1,6 @@
 class Connection
   include Mongoid::Document
+  include Mongoid::Timestamps
   field :depart_at, type: Time
   field :arrive_at, type: Time
   field :name, type: String
