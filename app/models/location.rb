@@ -3,6 +3,7 @@ class Location
   include Mongoid::Timestamps
 
   field :name, type: String
-  belongs_to :connection, inverse_of: :from
-  belongs_to :connection, inverse_of: :to
+
+  has_many :connections, inverse_of: :from
+  has_many :connections, inverse_of: :to
 end

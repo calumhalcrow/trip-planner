@@ -5,7 +5,8 @@ class Connection
   field :depart_at, type: DateTime
   field :arrive_at, type: DateTime
   field :name, type: String
-  has_one :from, class_name: "Location"
-  has_one :to, class_name: "Location"
-  embedded_in :trip
+
+  belongs_to :from, class_name: 'Location', inverse_of: nil
+  belongs_to :to, class_name: 'Location', inverse_of: nil
+  belongs_to :trip
 end
