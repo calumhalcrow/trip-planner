@@ -1,6 +1,6 @@
 class Location
   include Mongoid::Document
   field :name, type: String
-  embedded_in :departing_from, class_name: "Connection", inverse_of: :from
-  embedded_in :arriving_at, class_name: "Connection", inverse_of: :to
+  belongs_to :connection, inverse_of: :from
+  belongs_to :connection, inverse_of: :to
 end

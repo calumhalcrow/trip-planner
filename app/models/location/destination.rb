@@ -1,4 +1,4 @@
 class Location::Destination
   include Mongoid::Document
-  embedded_in :trip
+  belongs_to :trip
 end

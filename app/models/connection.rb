@@ -3,7 +3,7 @@ class Connection
   field :depart_at, type: Time
   field :arrive_at, type: Time
   field :name, type: String
-  embeds_one :from, class_name: "Location", inverse_of: :departing_from
-  embeds_one :to, class_name: "Location", inverse_of: :arriving_at
+  has_one :from, class_name: "Location"
+  has_one :to, class_name: "Location"
   embedded_in :trip
 end
