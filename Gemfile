@@ -40,3 +40,5 @@ gem 'mongoid', '~> 3.0.0'
 
 gem 'rspec-rails', :group => [:test, :development]
 gem 'database_cleaner', :group => [:test]
+
+gem 'omniauth-facebook'
