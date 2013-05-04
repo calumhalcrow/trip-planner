@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>TripPlanner</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
+  <title>Trip Planner</title>
+  <%= stylesheet_link_tag "application", :media => "all" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -19,5 +18,6 @@
 
 <%= yield %>
 
+  <%= javascript_include_tag "application" %>
 </body>
 </html>

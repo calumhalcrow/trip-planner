@@ -12,4 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require handlebars-1.0.0-rc.3.js
+//= require ember-1.0.0-rc.3.js
 //= require_tree .
