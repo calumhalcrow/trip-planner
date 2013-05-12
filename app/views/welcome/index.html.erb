@@ -1,13 +1,17 @@
   <script type="text/x-handlebars">
-    <h2>Welcome to Ember.js</h2>
-
+    <h1>{{appName}}</h1>
+    <h2>{{title}}</h2>
     {{outlet}}
   </script>
 
-  <script type="text/x-handlebars" data-template-name="index">
+  <script type="text/x-handlebars" data-template-name="user">
     <ul>
-    {{#each item in model}}
-      <li>{{item}}</li>
-    {{/each}}
+      <li>{{model.name}}</li>
+      <li>{{model.email}}</li>
+      <li>{{model.allTheThings}}</li>
     </ul>
+  </script>
+
+  <script type="text/javascript">
+    var currentUserId = "<%= session[:user_id] %>";
   </script>
