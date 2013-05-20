@@ -1,4 +1,4 @@
-window.TP = Ember.Application.create();
+window.TP = Ember.Application.create({LOG_TRANSITIONS: true});
 
 TP.ApplicationRoute = Ember.Route.extend({
   setupController: function(controller) {
