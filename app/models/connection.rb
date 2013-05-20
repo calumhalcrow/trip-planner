@@ -6,7 +6,6 @@ class Connection
   field :arrive_at, type: DateTime
   field :name, type: String
 
-  belongs_to :from, class_name: 'Location', inverse_of: nil
-  belongs_to :to, class_name: 'Location', inverse_of: nil
+  belongs_to :location
   belongs_to :trip
 end

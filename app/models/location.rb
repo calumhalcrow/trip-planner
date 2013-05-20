@@ -4,6 +4,5 @@ class Location
 
   field :name, type: String
 
-  has_many :connections, inverse_of: :from
-  has_many :connections, inverse_of: :to
+  has_many :connections
 end
