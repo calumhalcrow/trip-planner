@@ -1,10 +1,5 @@
 window.TP = Ember.Application.create({LOG_TRANSITIONS: true});
 
-TP.ApplicationRoute = Ember.Route.extend({
-  setupController: function(controller) {
-    controller.set('title', "Hello world!");
-  }
-});
 
 TP.ApplicationController = Ember.Controller.extend({
   appName: 'Trip Planner'
@@ -53,11 +48,11 @@ TP.Connection = DS.Model.extend({
 
 
 TP.Router.map(function() {
-  this.route('user');
+  this.resource('user', {path: '/user/:user_id'});
 });
 
-TP.UserRoute = Ember.Route.extend({
-  model: function() {
-    return TP.User.find(currentUserId);
+TP.IndexRoute = Ember.Route.extend({
+  setupController: function(controller) {
+    controller.set('title', "Hello world!");
   }
 });
