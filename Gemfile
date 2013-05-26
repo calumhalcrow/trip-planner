@@ -42,3 +42,5 @@ gem 'rspec-rails', :group => [:test, :development]
 gem 'database_cleaner', :group => [:test]
 
 gem 'omniauth-facebook'
+
+gem 'factory_girl_rails'
