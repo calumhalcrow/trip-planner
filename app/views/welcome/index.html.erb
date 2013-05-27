@@ -1,17 +1,30 @@
   <script type="text/x-handlebars">
-    <div id="user_nav">
-      <% if current_user %>
-        Signed in as <strong><%= current_user.name %></strong>!
-        <%= link_to "Sign out", signout_path, id: "sign_out" %>
-      <% else %>
-        <%= link_to "Sign in with Facebook", "/auth/facebook", id: "sign_in" %>
-      <% end %>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">{{appName}}</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active">{{#linkTo index}}Home{{/linkTo}}</li>
+              <% if current_user %>
+                <li>{{#linkTo index}}<%= current_user.name %>{{/linkTo}}</li>
+                <li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
+              <% else %>
+                <li><%= link_to "FB sign in", "/auth/facebook", id: "sign_in" %></li>
+              <% end %>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
     </div>
-    <ul class="nav">
-      <li>{{#linkTo index}}Home{{/linkTo}}</li>
-    </ul>
-    <h1>{{appName}}</h1>
-    {{outlet}}
+    <div class="container">
+      {{outlet}}
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="index">

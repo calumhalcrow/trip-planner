@@ -15,4 +15,5 @@
 //= require handlebars-1.0.0-rc.3.js
 //= require ember-latest.js
 //= require ember-data-latest.js
+//= bootstrap.min.js
 //= require_tree .
