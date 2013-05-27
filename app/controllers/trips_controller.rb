@@ -2,11 +2,15 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.all
+
+    @trips = params[:ids] ? Trip.find(params[:ids]) : Trip.all
+
+    # Maybe an 'id' model method?
+    @trips = @trips.map { |trip| {:id => trip._id, :name => trip.name } }
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @trips }
+      format.json { render json: {:trips => @trips} }
     end
   end
 
@@ -17,7 +21,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @trip }
+      format.json { render json: {:trip => @trip} }
     end
   end
 

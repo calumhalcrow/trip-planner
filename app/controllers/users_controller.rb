@@ -15,9 +15,15 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
 
+    show = {
+      :name => @user.name,
+      :email => @user.email,
+      :trip_ids => @user.trips.map { |trip| trip._id },
+    }
+
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: {:user => @user }}
+      format.json { render json: {:user => show} }
     end
   end
 
