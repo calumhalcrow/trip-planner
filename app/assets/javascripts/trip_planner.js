@@ -49,6 +49,7 @@ TP.Connection = DS.Model.extend({
 
 TP.Router.map(function() {
   this.resource('user', {path: '/user/:user_id'});
+  this.resource('trip', {path: '/trip/:trip_id'});
 });
 
 TP.IndexRoute = Ember.Route.extend({

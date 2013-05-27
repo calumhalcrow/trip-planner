@@ -32,11 +32,21 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="user">
+    <h2>Personal Details:</h2>
     <ul>
-      <li>{{model.name}}</li>
-      <li>{{model.email}}</li>
-      <li>{{model.allTheThings}}</li>
+      <li>Name: {{model.name}}</li>
+      <li>Email: {{model.email}}</li>
     </ul>
+    <h2>Planned Trips:</h2>
+      {{#each trip in model.trips}}
+        <li>{{#linkTo trip trip}}{{trip.name}}{{/linkTo}}</li>
+      {{/each}}
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="trip">
+    <h2>{{model.name}}</h2>
+    <p>Details coming.</p>
   </script>
 
   <script type="text/javascript">
