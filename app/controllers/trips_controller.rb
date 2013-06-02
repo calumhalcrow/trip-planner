@@ -1,39 +1,25 @@
 class TripsController < ApplicationController
+
+  respond_to :json
+
   # GET /trips
-  # GET /trips.json
+  # GET /trips?ids[]=123456
   def index
-
-    @trips = params[:ids] ? Trip.find(params[:ids]) : Trip.all
-
-    # Maybe an 'id' model method?
-    @trips = @trips.map { |trip| {:id => trip._id, :name => trip.name } }
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: {:trips => @trips} }
-    end
+    trips = find_trips.map { |trip| {:id => trip._id, :name => trip.name } }
+    show = { :trips => trips }
+    respond_with show
   end
 
   # GET /trips/1
-  # GET /trips/1.json
   def show
-    @trip = Trip.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: {:trip => @trip} }
-    end
+    show = { :trip => find_trip }
+    respond_with show
   end
 
   # GET /trips/new
-  # GET /trips/new.json
   def new
-    @trip = Trip.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @trip }
-    end
+    show = { :trip => find_trip }
+    respond_with show
   end
 
   # GET /trips/1/edit
@@ -42,46 +28,36 @@ class TripsController < ApplicationController
   end
 
   # POST /trips
-  # POST /trips.json
   def create
-    @trip = Trip.new(params[:trip])
-
-    respond_to do |format|
-      if @trip.save
-        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
-        format.json { render json: @trip, status: :created, location: @trip }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @trip.errors, status: :unprocessable_entity }
-      end
-    end
+    trip = find_trip
+    trip.save
+    show = { :trip => trip }
+    respond_with show
   end
 
   # PUT /trips/1
-  # PUT /trips/1.json
   def update
-    @trip = Trip.find(params[:id])
-
-    respond_to do |format|
-      if @trip.update_attributes(params[:trip])
-        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @trip.errors, status: :unprocessable_entity }
-      end
-    end
+    trip = find_trip
+    trip.update_attributes(params[:trip])
+    show = { :trip => trip }
+    respond_with show
   end
 
   # DELETE /trips/1
-  # DELETE /trips/1.json
   def destroy
-    @trip = Trip.find(params[:id])
-    @trip.destroy
+    trip = find_trip
+    trip.destroy
+    show = { :trip => trip }
+    respond_with show
+  end
 
-    respond_to do |format|
-      format.html { redirect_to trips_url }
-      format.json { head :no_content }
-    end
+  private
+
+  def find_trip
+    params[:action] =~ /new|create/ ? Trip.new(params[:trip]) : Trip.find(params[:id])
+  end
+
+  def find_trips
+    params[:ids] ? Trip.find(params[:ids]) : Trip.all
   end
 end

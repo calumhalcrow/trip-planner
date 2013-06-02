@@ -1,41 +1,32 @@
 class UsersController < ApplicationController
-  # GET /users
-  # GET /users.json
-  def index
-    @users = User.all
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @users }
-    end
+  respond_to :json
+
+  # GET /users
+  # GET /users?ids[]=123456
+  def index
+    users = find_users.map { |user| {:id => user._id, :name => user.name } }
+    show = { :users => users }
+    respond_with show
   end
 
   # GET /users/1
-  # GET /users/1.json
   def show
-    @user = User.find(params[:id])
-
+    user = find_user
     show = {
-      :name => @user.name,
-      :email => @user.email,
-      :trip_ids => @user.trips.map { |trip| trip._id },
+      :user => {
+        :name     => user.name,
+        :email    => user.email,
+        :trip_ids => user.trips.map { |trip| trip._id },
+      }
     }
-
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: {:user => show} }
-    end
+    respond_with show
   end
 
   # GET /users/new
-  # GET /users/new.json
   def new
-    @user = User.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @user }
-    end
+    show = { :user => find_user }
+    respond_with show
   end
 
   # GET /users/1/edit
@@ -44,46 +35,36 @@ class UsersController < ApplicationController
   end
 
   # POST /users
-  # POST /users.json
   def create
-    @user = User.new(params[:user])
-
-    respond_to do |format|
-      if @user.save
-        format.html { redirect_to @user, notice: 'User was successfully created.' }
-        format.json { render json: @user, status: :created, location: @user }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    user = find_user
+    user.save
+    show = { :user => user }
+    respond_with show
   end
 
   # PUT /users/1
-  # PUT /users/1.json
   def update
-    @user = User.find(params[:id])
-
-    respond_to do |format|
-      if @user.update_attributes(params[:user])
-        format.html { redirect_to @user, notice: 'User was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
-      end
-    end
+    user = find_user
+    user.update_attributes(params[:user])
+    show = { :user => user }
+    respond_with show
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
   def destroy
-    @user = User.find(params[:id])
-    @user.destroy
+    user = find_user
+    user.destroy
+    show = { :user => user }
+    respond_with show
+  end
 
-    respond_to do |format|
-      format.html { redirect_to users_url }
-      format.json { head :no_content }
-    end
+  private
+
+  def find_user
+    params[:action] =~ /new|create/ ? User.new(params[:user]) : User.find(params[:id])
+  end
+
+  def find_users
+    params[:ids] ? User.find(params[:ids]) : User.all
   end
 end
