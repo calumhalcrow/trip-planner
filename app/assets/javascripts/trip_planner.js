@@ -47,6 +47,7 @@ TP.Destination = TP.Location.extend({
   trip: DS.belongsTo('TP.Trip')
 });
 TP.Home = TP.Location.extend({
+  name: DS.attr('string'),
   user: DS.belongsTo('TP.User')
 });
 
@@ -65,7 +66,6 @@ TP.Router.map(function() {
   this.resource('trip', {path: '/trip/:trip_id'});
   this.route('signout');
 });
-
 
 TP.UserRoute = Ember.Route.extend({
   setupController: function(controller, user) {
