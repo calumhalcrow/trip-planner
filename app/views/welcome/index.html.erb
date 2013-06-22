@@ -11,18 +11,19 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li class="active">{{#linkTo index}}Home{{/linkTo}}</li>
-              <% if current_user %>
-                <li>{{#linkTo index}}<%= current_user.name %>{{/linkTo}}</li>
-                <li><%= link_to "Sign out", signout_path, id: "sign_out" %></li>
-              <% else %>
-                <li><%= link_to "FB sign in", "/auth/facebook", id: "sign_in" %></li>
-              <% end %>
+              {{#if currentUser}}
+                <li>{{#linkTo user currentUser}}{{currentUser.name}}{{/linkTo}}</li>
+                <li>{{#linkTo signout}}Sign Out{{/linkTo}}</li>
+              {{else}}
+                <li><a href="/auth/facebook">FB sign in</a></li>
+              {{/if}}
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
     <div class="container">
+
       {{outlet}}
     </div>
   </script>

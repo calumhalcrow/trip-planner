@@ -2,10 +2,19 @@ window.TP = Ember.Application.create({LOG_TRANSITIONS: true});
 
 
 TP.ApplicationController = Ember.Controller.extend({
-  appName: 'Trip Planner'
+  appName: 'Trip Planner',
+  init: function() {
+    var currentUser, existingUser;
+    var storedUserId = window.localStorage.currentUserId;
+    if (storedUserId) {
+      existingUser = TP.User.find(storedUserId);
+      if (!existingUser.isNew) {
+        currentUser = existingUser;
+      }
+    }
+    this.currentUser = currentUser;
+  }
 });
-
-
 
 TP.Store = DS.Store.extend({
   revision: 12,
@@ -50,10 +59,21 @@ TP.Connection = DS.Model.extend({
 TP.Router.map(function() {
   this.resource('user', {path: '/user/:user_id'});
   this.resource('trip', {path: '/trip/:trip_id'});
+  this.route('signout');
 });
 
-TP.IndexRoute = Ember.Route.extend({
-  setupController: function(controller) {
-    controller.set('title', "Hello world!");
+
+TP.UserRoute = Ember.Route.extend({
+  setupController: function(controller, user) {
+    window.localStorage.currentUserId = user.id;
+    this.controllerFor('application').set('currentUser', TP.User.find(user.id))
+  }
+});
+
+TP.SignoutRoute = Ember.Route.extend({
+  redirect: function() {
+    delete window.localStorage.currentUserId;
+    this.controllerFor('application').set('currentUser', null)
+    this.transitionTo('index');
   }
 });
