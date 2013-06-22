@@ -13,6 +13,7 @@ class UsersController < RemRestController
       @resource => {
         :name     => user.name,
         :email    => user.email,
+        :home_id  => user.home._id,
         :trip_ids => user.trips.map { |trip| trip._id },
       }
     }
