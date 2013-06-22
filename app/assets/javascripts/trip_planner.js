@@ -20,6 +20,10 @@ TP.Store = DS.Store.extend({
   revision: 12,
   adapter: 'DS.RESTAdapter'
 });
+DS.RESTAdapter.configure("plurals", {
+  destination: "location/destinations",
+  home: "location/homes"
+});
 
 TP.User = DS.Model.extend({
   name: DS.attr('string'),
