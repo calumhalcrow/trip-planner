@@ -11,16 +11,16 @@ FactoryGirl.define do
 
   factory :location do
     name "E&O Georgetown"
-
-    factory :destination, class: 'Location::Destination' do
-      name "Penang"
-    end
-
-    factory :home, class: 'Location::Home' do
-      name "Home"
-    end
   end
 
+  factory :destination, class: 'Location::Destination' do
+    name "Penang"
+  end
+
+  factory :home, class: 'Location::Home' do
+    name "Home"
+    user
+  end
 
   factory :trip do
     name "Penang Summer Getaway"
@@ -31,6 +31,5 @@ FactoryGirl.define do
   factory :user do
     name "John Doe"
     email  "johndoe@example.com"
-    association :home
   end
 end
