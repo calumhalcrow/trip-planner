@@ -37,8 +37,15 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.6.2)
+    columnize (0.3.6)
     daemons (1.1.9)
     database_cleaner (0.9.1)
+    debugger (1.6.0)
+      columnize (>= 0.3.1)
+      debugger-linecache (~> 1.2.0)
+      debugger-ruby_core_source (~> 1.2.1)
+    debugger-linecache (1.2.0)
+    debugger-ruby_core_source (1.2.3)
     diff-lcs (1.2.4)
     erubis (2.7.0)
     eventmachine (1.0.3)
@@ -157,6 +164,7 @@ PLATFORMS
 DEPENDENCIES
   coffee-rails (~> 3.2.1)
   database_cleaner
+  debugger
   factory_girl_rails
   jquery-rails
   mongoid (~> 3.0.0)

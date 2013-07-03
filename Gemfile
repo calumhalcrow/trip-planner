@@ -46,3 +46,4 @@ gem 'omniauth-facebook'
 gem 'factory_girl_rails'
 
 gem 'thin'
+gem 'debugger'
