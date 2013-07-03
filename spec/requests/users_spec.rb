@@ -1,10 +1,18 @@
 require 'spec_helper'
+require 'factory_girl_rails'
 
 describe "Users" do
   describe "GET /users" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get users_path
+    it "Gets all users." do
+      get users_path, format: :json
+      response.status.should be(200)
+    end
+  end
+
+  describe "GET /users/:id" do
+    it "Get a single user by id." do
+      home = FactoryGirl.create(:home)
+      get "/users/#{home.user.id}", format: :json
       response.status.should be(200)
     end
   end
