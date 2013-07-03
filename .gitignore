@@ -16,3 +16,6 @@
 
 /vendor/ruby
 *.swp
+
+# Some local rake test/experimental tasks
+lib/tasks/db.rake
