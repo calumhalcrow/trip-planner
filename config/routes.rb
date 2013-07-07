@@ -1,25 +1,10 @@
 TripPlanner::Application.routes.draw do
-  resources :trips
-
-
-  resources :connections
-
-
   resources :users
-
-
-  namespace :location do
-    resources :destinations
-  end
-
-
-  namespace :location do
-    resources :homes
-  end
-
-
-  resources :locations
-
+  resources :trips
+  resources :connections
+  resources :stops
+  resources :destinations
+  resources :homes
 
   match 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: redirect('/')
