@@ -27,4 +27,11 @@ describe "Users" do
       body['user']['home_id'].should_not be_nil
     end
   end
+
+  describe "POST /users/" do
+    it "Creates a new user." do
+      post "/users/", {:user => {:name => 'Calum', :email => 'calum@example.com'}}
+      response.status.should be(200)
+    end
+  end
 end
