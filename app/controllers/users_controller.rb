@@ -21,6 +21,6 @@ class UsersController < RemRestController
       show[@resource][:home_id] = user.home._id
     end
 
-    respond_with show
+    render json: show
   end
 end

@@ -5,27 +5,25 @@ class RemRestController < ApplicationController
   @resources
   @model
 
-  respond_to :json
-
   # GET /resources
   # GET /resources?ids[]=123456
   def index
     resources = find_resources.map { |resource| {:id => resource._id, :name => resource.name } }
     show = { @resources => resources }
-    respond_with show
+    render json: show
   end
 
   # GET /resources/1
   def show
     resource = find_resource
     show = { @resource => resource }
-    respond_with show
+    render json: show
   end
 
   # GET /resources/new
   def new
     show = { @resource => find_resource }
-    respond_with show
+    render json: show
   end
 
   # GET /resources/1/edit
@@ -38,7 +36,7 @@ class RemRestController < ApplicationController
     resource = find_resource
     resource.save
     show = { @resource => resource }
-    respond_with show
+    render json: show
   end
 
   # PUT /resources/1
@@ -46,7 +44,7 @@ class RemRestController < ApplicationController
     resource = find_resource
     resource.update_attributes(params[@resource])
     show = { @resource => resource }
-    respond_with show
+    render json: show
   end
 
   # DELETE /resources/1
@@ -54,7 +52,7 @@ class RemRestController < ApplicationController
     resource = find_resource
     resource.destroy
     show = { @resource => resource }
-    respond_with show
+    render json: show
   end
 
   private
