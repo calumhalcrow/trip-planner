@@ -47,3 +47,4 @@ gem 'factory_girl_rails'
 
 gem 'thin'
 gem 'debugger'
+gem 'active_model_serializers'

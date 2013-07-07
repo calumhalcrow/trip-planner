@@ -9,21 +9,17 @@ class RemRestController < ApplicationController
   # GET /resources?ids[]=123456
   def index
     resources = find_resources.map { |resource| {:id => resource._id, :name => resource.name } }
-    show = { @resources => resources }
-    render json: show
+    render json: resources
   end
 
   # GET /resources/1
   def show
-    resource = find_resource
-    show = { @resource => resource }
-    render json: show
+    render json: find_resource
   end
 
   # GET /resources/new
   def new
-    show = { @resource => find_resource }
-    render json: show
+    render json: find_resource
   end
 
   # GET /resources/1/edit
@@ -35,24 +31,21 @@ class RemRestController < ApplicationController
   def create
     resource = find_resource
     resource.save
-    show = { @resource => resource }
-    render json: show
+    render json: resource
   end
 
   # PUT /resources/1
   def update
     resource = find_resource
     resource.update_attributes(params[@resource])
-    show = { @resource => resource }
-    render json: show
+    render json: resource
   end
 
   # DELETE /resources/1
   def destroy
     resource = find_resource
     resource.destroy
-    show = { @resource => resource }
-    render json: show
+    render json: resource
   end
 
   private
