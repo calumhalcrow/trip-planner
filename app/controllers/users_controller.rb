@@ -13,10 +13,14 @@ class UsersController < RemRestController
       @resource => {
         :name     => user.name,
         :email    => user.email,
-        :home_id  => user.home._id,
         :trip_ids => user.trips.map { |trip| trip._id },
       }
     }
+
+    if user.home?
+      show[@resource][:home_id] = user.home._id
+    end
+
     respond_with show
   end
 end
