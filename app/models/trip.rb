@@ -4,7 +4,7 @@ class Trip
 
   field :name, type: String
 
-  has_one :destination, class_name: "Location::Destination"
+  has_one :destination
   has_many :connections
   belongs_to :user
 

@@ -1,8 +1,8 @@
-class Location
+class Stop
   include Mongoid::Document
   include Mongoid::Timestamps
 
   field :name, type: String
 
-  has_many :connections
+  belongs_to :connection
 end

@@ -6,6 +6,6 @@ class Connection
   field :arrive_at, type: DateTime
   field :name, type: String
 
-  belongs_to :location
+  has_one :stop
   belongs_to :trip
 end
