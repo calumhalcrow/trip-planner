@@ -1,11 +1,25 @@
 require 'spec_helper'
 
 describe "Trips" do
-  describe "GET /trips" do
-    it "works! (now write some real specs)" do
-      # Run the generator again with the --webrat flag if you want to use webrat methods/matchers
-      get trips_path
+
+  describe "POST /trips" do
+    it "Creates a new trip." do
+      user = FactoryGirl.create(:user, :name => 'Muggins')
+
+      trip_info = {
+        :trip => {
+          :name => 'Winter Seaside.',
+          :user_id => user.id,
+          :destination => {
+            :name => 'Pantai Cherating',
+          },
+        },
+      }
+
+      post "/trips/", trip_info
+
       response.status.should be(200)
     end
   end
+
 end
