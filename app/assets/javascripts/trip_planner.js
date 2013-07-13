@@ -20,10 +20,6 @@ TP.Store = DS.Store.extend({
   revision: 12,
   adapter: 'DS.RESTAdapter'
 });
-DS.RESTAdapter.configure("plurals", {
-  destination: "location/destinations",
-  home: "location/homes"
-});
 
 TP.User = DS.Model.extend({
   name: DS.attr('string'),
@@ -39,14 +35,15 @@ TP.Trip = DS.Model.extend({
   user: DS.belongsTo('TP.User')
 });
 
-TP.Location = DS.Model.extend({
+TP.Stop = DS.Model.extend({
   name: DS.attr('string'),
-  connections: DS.hasMany('TP.Connection')
+  connection: DS.belongsTo('TP.Connection')
 });
-TP.Destination = TP.Location.extend({
+TP.Destination = DS.Model.extend({
+  name: DS.attr('string'),
   trip: DS.belongsTo('TP.Trip')
 });
-TP.Home = TP.Location.extend({
+TP.Home = DS.Model.extend({
   name: DS.attr('string'),
   user: DS.belongsTo('TP.User')
 });
@@ -55,7 +52,7 @@ TP.Connection = DS.Model.extend({
   name: DS.attr('string'),
   depart_at: DS.attr('date'),
   arrive_at: DS.attr('date'),
-  location: DS.belongsTo('TP.Location'),
+  stop: DS.belongsTo('TP.Stop'),
   trip: DS.belongsTo('TP.Trip')
 });
 
