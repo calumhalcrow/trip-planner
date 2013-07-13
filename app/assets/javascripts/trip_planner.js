@@ -67,14 +67,14 @@ TP.Router.map(function() {
 TP.UserRoute = Ember.Route.extend({
   setupController: function(controller, user) {
     window.localStorage.currentUserId = user.id;
-    this.controllerFor('application').set('currentUser', TP.User.find(user.id))
+    this.controllerFor('application').set('currentUser', TP.User.find(user.id));
   }
 });
 
 TP.SignoutRoute = Ember.Route.extend({
   redirect: function() {
     delete window.localStorage.currentUserId;
-    this.controllerFor('application').set('currentUser', null)
+    this.controllerFor('application').set('currentUser', null);
     this.transitionTo('index');
   }
 });
