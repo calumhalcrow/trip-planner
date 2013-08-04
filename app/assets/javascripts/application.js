@@ -12,8 +12,8 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require handlebars-1.0.0-rc.3.js
-//= require ember-latest.js
+//= require handlebars-1.0.0-rc.4.js
+//= require ember-1.0.0-rc.6.1.js
 //= require ember-data-latest.js
 //= bootstrap.min.js
 //= require_tree .
