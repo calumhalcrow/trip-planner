@@ -19,6 +19,9 @@ describe "Trips" do
       post "/trips/", trip_info
 
       response.status.should be(200)
+
+      body = ActiveSupport::JSON.decode(response.body)
+      body['destinations'][0]['id'].should eq(body['trip']['destination_id'])
     end
   end
 
