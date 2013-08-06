@@ -2,6 +2,16 @@ require 'spec_helper'
 
 describe "Trips" do
 
+  describe "GET /trips" do
+    it "Gets an existing trip." do
+      trip = FactoryGirl.create(:trip)
+
+      get "/trips/#{trip.id}"
+
+      response.status.should be(200)
+    end
+  end
+
   describe "POST /trips" do
     it "Creates a new trip." do
       user = FactoryGirl.create(:user, :name => 'Muggins')

@@ -49,6 +49,8 @@ TP.Connection = DS.Model.extend({
 
 
 
+
+
 TP.Router.map(function() {
   this.resource('users', {path: '/users'}, function () {
     this.resource('user', {path: '/:user_id'});
