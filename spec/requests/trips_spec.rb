@@ -43,8 +43,7 @@ describe "Trips" do
 
       body = ActiveSupport::JSON.decode(response.body)
 
-      expect{Trip.find(body['trip']['id'])}.to
-        raise_error(Mongoid::Errors::DocumentNotFound)
+      expect{Trip.find(body['trip']['id'])}.to raise_error(Mongoid::Errors::DocumentNotFound)
     end
   end
 
