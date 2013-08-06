@@ -34,4 +34,18 @@ describe "Trips" do
     end
   end
 
+  describe "DELETE /trips" do
+    it "Deletes an existing trip." do
+      trip = FactoryGirl.create(:trip)
+      delete "/trips/#{trip.id}"
+
+      response.status.should be(200)
+
+      body = ActiveSupport::JSON.decode(response.body)
+
+      expect{Trip.find(body['trip']['id'])}.to
+        raise_error(Mongoid::Errors::DocumentNotFound)
+    end
+  end
+
 end
