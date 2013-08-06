@@ -67,9 +67,21 @@ TP.Router.map(function() {
 TP.UserRoute = Ember.Route.extend({
   setupController: function(controller, user) {
     window.localStorage.currentUserId = user.id;
-    this.controllerFor('application').set('currentUser', TP.User.find(user.id));
+    var user = TP.User.find(user.id);
+    this.controllerFor('application').set('currentUser', user);
+
+    controller.destroyTrip = function(trip) {
+      // Reload the user after the trip deletion
+      // has been successfully committed.
+      trip.one('didDelete', this, function() {
+        user.reload();
+      });
+      trip.deleteRecord();
+      trip.get('transaction').commit();
+    };
   }
 });
+
 
 TP.TripsRoute = Ember.Route.extend({
   model: function() {

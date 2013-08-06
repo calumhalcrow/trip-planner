@@ -41,7 +41,7 @@
     <h2>Planned Trips:</h2>
     <ul>
       {{#each trip in model.trips}}
-        <li>{{#linkTo trip trip}}{{trip.name}}{{/linkTo}}</li>
+        <li>{{#linkTo trip trip}}{{trip.name}}{{/linkTo}} [<a {{action destroyTrip trip}}>delete</a>]</li>
       {{/each}}
     </ul>
     <p>{{#linkTo trips.new}}Create new trip{{/linkTo}}</li>
