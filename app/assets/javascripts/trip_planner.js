@@ -1,4 +1,5 @@
 window.TP = Ember.Application.create({LOG_TRANSITIONS: true});
+Ember.TESTING_DEPRECATION = true;
 
 
 TP.ApplicationController = Ember.Controller.extend({
