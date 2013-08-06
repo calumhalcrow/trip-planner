@@ -60,8 +60,15 @@ TP.Connection = DS.Model.extend({
 
 
 TP.Router.map(function() {
-  this.resource('user', {path: '/user/:user_id'});
-  this.resource('trip', {path: '/trip/:trip_id'});
+  this.resource('users', {path: '/users'}, function () {
+    this.resource('user', {path: '/:user_id'});
+  });
+
+  this.resource('trips', {path: '/trips'}, function () {
+    this.resource('trip', {path: '/:trip_id'});
+    this.route('new');
+  });
+
   this.route('signout');
 });
 
