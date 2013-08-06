@@ -17,9 +17,14 @@ TP.ApplicationController = Ember.Controller.extend({
   }
 });
 
+TP.Adapter = DS.RESTAdapter.extend();
+TP.Adapter.map('TP.Trip', {
+  connections: { embedded: 'always' }
+ });
+
 TP.Store = DS.Store.extend({
   revision: 12,
-  adapter: 'DS.RESTAdapter'
+  adapter: 'TP.Adapter'
 });
 
 TP.User = DS.Model.extend({
@@ -61,6 +66,80 @@ TP.UserRoute = Ember.Route.extend({
   setupController: function(controller, user) {
     window.localStorage.currentUserId = user.id;
     this.controllerFor('application').set('currentUser', TP.User.find(user.id));
+  }
+});
+
+TP.TripsRoute = Ember.Route.extend({
+  model: function() {
+    return TP.Trip.all();
+  }
+});
+
+
+
+TP.TripsNewRoute = Ember.Route.extend({
+  model: function() {
+    // Because we are maintaining a transaction locally in the controller for editing,
+    // the new record needs to be created in the controller.
+    return null;
+  },
+
+  setupController: function(controller) {
+    this._super.apply(this, arguments);
+    controller.startEditing();
+  },
+
+  deactivate: function() {
+    this.controllerFor('trips.new').stopEditing();
+  }
+});
+
+TP.TripsNewController = Ember.ObjectController.extend({
+
+  startEditing: function() {
+    // create a new record on a local transaction
+
+    this.transaction = this.get('store').transaction();
+
+    this.set('model', this.transaction.createRecord(
+      TP.Trip,
+      {user: this.controllerFor('application').get('currentUser')}
+    ));
+  },
+
+  stopEditing: function() {
+    // rollback the local transaction if it hasn't already been cleared
+    if (this.transaction) {
+      this.transaction.rollback();
+      this.transaction = null;
+    }
+  },
+
+  save: function() {
+    // commit and then clear the local transaction
+    this.transaction.commit();
+    this.transaction = null;
+  },
+
+  transitionAfterSave: function() {
+    // when creating new records, it's necessary to wait for the record to be assigned
+    // an id before we can transition to its route (which depends on its id)
+    if (this.get('model.id')) {
+      this.transitionToRoute('trip', this.get('model'));
+    }
+  }.observes('model.id'),
+
+  cancel: function() {
+    this.stopEditing();
+    this.transitionToRoute('trips.index');
+  },
+
+  addConnection: function() {
+    this.get('model.connections').createRecord();
+  },
+
+  removeConnection: function(connection) {
+    connection.deleteRecord();
   }
 });
 

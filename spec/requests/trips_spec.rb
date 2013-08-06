@@ -11,6 +11,7 @@ describe "Trips" do
           :name => 'Winter Seaside.',
           :user_id => user.id,
           :destination => 'Pantai Cherating',
+          :connections => [{:name => 'Conn1'}],
         },
       }
 

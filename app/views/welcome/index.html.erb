@@ -39,17 +39,71 @@
       <li>Email: {{model.email}}</li>
     </ul>
     <h2>Planned Trips:</h2>
+    <ul>
       {{#each trip in model.trips}}
+        <li>{{#linkTo trip trip}}{{trip.name}}{{/linkTo}}</li>
+      {{/each}}
+    </ul>
+    <p>{{#linkTo trips.new}}Create new trip{{/linkTo}}</li>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="trip">
+    <h2>{{name}}</h2>
+    <p><em>To {{destination}}.</em></p>
+    <ul>
+      <li>Start: {{user.home}}</li>
+    {{#each connections}}
+      <li>{{name}}</li>
+    {{/each}}
+    </ul>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="trips/index">
+    <ul>
+      {{#each trip in model}}
         <li>{{#linkTo trip trip}}{{trip.name}}{{/linkTo}}</li>
       {{/each}}
     </ul>
   </script>
 
-  <script type="text/x-handlebars" data-template-name="trip">
-    <h2>{{model.name}}</h2>
-    <p>Details coming.</p>
+  <script type="text/x-handlebars" data-template-name="trips/new">
+    <form {{action save on="submit"}} class="form-horizontal">
+      <legend>Create Trip</legend>
+
+      {{partial "trip_edit_fields"}}
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Create</button>
+        <button class="btn" {{action cancel}}>Cancel</button>
+      </div>
+    </form>
   </script>
 
-  <script type="text/javascript">
-    var currentUserId = "<%= session[:user_id] %>";
+  <script type="text/x-handlebars" data-template-name="_trip_edit_fields">
+    <div class="control-group">
+      <label class="control-label" for="name">Trip name</label>
+      <div class="controls">
+        {{view Ember.TextField valueBinding="name" id="name" placeholder="Trip name" required="true"}}
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="destination">Destination</label>
+      <div class="controls">
+          {{view Ember.TextField valueBinding="destination" id="destination" placeholder="Desintation" required="true"}}
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label class="control-label" for="connection">Connections</label>
+      <div class="controls">
+        {{#each connections}}
+          <div class="connection">
+            {{view Ember.TextField valueBinding="name" placeholder="Connection"}}
+            <a class="btn" {{action removeConnection this}}><i class="icon-minus-sign"></i> Remove</a>
+          </div>
+        {{/each}}
+        <a class="btn" {{action addConnection}}><i class="icon-plus-sign"></i> Add a connection</a>
+      </div>
+    </div>
   </script>
