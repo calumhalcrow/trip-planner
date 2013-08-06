@@ -1,6 +1,5 @@
 class UserSerializer < ActiveModel::Serializer
-  attributes :id, :name, :email
+  attributes :id, :name, :email, :home
   has_many :trips
-  has_one :home
   embed :ids, include: true
 end

@@ -5,7 +5,7 @@ class Connection
   field :depart_at, type: DateTime
   field :arrive_at, type: DateTime
   field :name, type: String
+  field :stop, type: String
 
-  has_one :stop
   belongs_to :trip
 end

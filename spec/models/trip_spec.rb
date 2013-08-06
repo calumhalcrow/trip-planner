@@ -8,21 +8,15 @@ describe Trip do
     trip.persisted?.should be_true
     trip.valid?.should be_true
 
-    Destination.create(:name => 'Cherating', :trip => trip)
-
-    trip.destination.persisted?.should be_true
-
-    stop = Stop.create(:name => 'Gerai Keropok Lekor')
     Connection.create(
       :name => 'Home to KLIA',
       :depart_at => Time.utc(2013,"may",15,8,0,0),
       :arrive_at => Time.utc(2013,"may",15,13,0,0),
-      :stop => stop,
+      :stop => 'KLIA',
       :trip => trip,
     )
 
     trip.connections[0].persisted?.should be_true
     trip.connections[0].name.should eq 'Home to KLIA'
-    trip.connections[0].stop.id.should eq stop.id
   end
 end

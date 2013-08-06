@@ -13,11 +13,5 @@ describe User do
     user.persisted?.should be_true
     user.valid?.should be_true
     user.save.should be_true
-
-    # Let's add the user's home location.
-    Home.create(:name => 'Home', :user => user)
-
-    user.home.persisted?.should be_true
-    user.home.name.should eq 'Home'
   end
 end

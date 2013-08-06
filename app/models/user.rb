@@ -4,6 +4,7 @@ class User
 
   field :name, type: String
   field :email, type: String
+  field :home, type: String
   field :provider, type: String
   field :uid, type: String
   field :oauth_token, type: String
@@ -13,7 +14,6 @@ class User
   validates :email, :length => { :minimum => 6, :allow_blank => false }
 
   has_many :trips
-  has_one :home
 
   def self.from_omniauth(auth)
     User.find_or_initialize_by(auth.slice(:provider, :uid)).tap do |user|

@@ -10,9 +10,7 @@ describe "Trips" do
         :trip => {
           :name => 'Winter Seaside.',
           :user_id => user.id,
-          :destination => {
-            :name => 'Pantai Cherating',
-          },
+          :destination => 'Pantai Cherating',
         },
       }
 
@@ -21,7 +19,7 @@ describe "Trips" do
       response.status.should be(200)
 
       body = ActiveSupport::JSON.decode(response.body)
-      body['destinations'][0]['id'].should eq(body['trip']['destination_id'])
+      body['trip']['destination'].should eq('Pantai Cherating')
     end
   end
 
